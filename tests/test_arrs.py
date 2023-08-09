@@ -20,3 +20,13 @@ def test_get(array, index, default, expected):
 ])
 def test_slice(coll, start, end, expected):
     assert arrs.my_slice(coll, start, end) == expected
+
+
+@pytest.mark.parametrize('array, index, default, raise_error', [
+    (dict(), 1, None, KeyError),
+    (dict(), None, None, TypeError),
+    (set(), None, None, TypeError)
+])
+def test_get_raise(array, index, default, raise_error):
+    with pytest.raises(raise_error):
+        arrs.get(array, index, default)
